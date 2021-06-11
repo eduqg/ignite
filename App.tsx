@@ -10,7 +10,7 @@ export default function App() {
   const [isEnabled, setIsEnabled] = useState(false);
 
   return (
-    <ThemeProvider theme={isEnabled ? light : dark} >
+    <ThemeProvider theme={isEnabled ? dark : light} >
       <StatusBar
         backgroundColor="transparent"
         translucent

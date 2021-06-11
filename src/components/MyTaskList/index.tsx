@@ -57,57 +57,9 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
       style={{
         paddingHorizontal: 24,
         paddingTop: 32,
-        backgroundColor: theme.background
+        backgroundColor: theme?.background || '#fff'
       }}
     />
   )
 }
-
-const styles = StyleSheet.create({
-  header: {
-    color: '#3D3D4D',
-    fontSize: 24,
-    fontFamily: 'Poppins-SemiBold'
-  },
-  taskButton: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    marginBottom: 4,
-    borderRadius: 4,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  taskMarker: {
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#3D3D4D',
-    marginRight: 10
-  },
-  taskText: {
-    color: '#3D3D4D',
-  },
-  taskButtonDone: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    marginBottom: 4,
-    borderRadius: 4,
-    backgroundColor: 'rgba(25, 61, 223, 0.1)',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  taskMarkerDone: {
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    backgroundColor: '#273FAD',
-    marginRight: 10
-  },
-  taskTextDone: {
-    color: '#A09CB1',
-    textDecorationLine: 'line-through'
-  }
-})
+ 

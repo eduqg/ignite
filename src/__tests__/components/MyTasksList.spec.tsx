@@ -2,6 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 
 import { MyTasksList } from '../../components/MyTaskList';
+import { ThemeProvider } from 'styled-components/native';
+import { light } from '../../styles/theme';
 
 let tasks: {
   id: number;
@@ -38,15 +40,24 @@ describe('MyTasksList', () => {
   });
 
   it('should be able to render all tasks', () => {
-    const { getByText } = render(<MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />)
-    
+    const { getByText } = render(
+      <ThemeProvider theme={light}>
+        <MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />
+      </ThemeProvider>
+    );
+
     getByText('Primeiro todo');
     getByText('Segundo todo');
     getByText('Terceiro todo');
   });
 
   it('should be able to handle "longPress" event', () => {
-    const { getByText } = render(<MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />)
+    const { getByText } = render(
+      <ThemeProvider theme={light}>
+        <MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />
+      </ThemeProvider>
+    );
+
     const firstTask = getByText('Primeiro todo');
 
     fireEvent(firstTask, 'longPress');
@@ -54,8 +65,13 @@ describe('MyTasksList', () => {
     expect(mockedOnLongPress).toHaveBeenCalledWith(tasks[0].id);
   });
 
-  it('should be able to handle "press" event', () => {    
-    const { getByText } = render(<MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />)
+  it('should be able to handle "press" event', () => {
+    const { getByText } = render(
+      <ThemeProvider theme={light}>
+        <MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />
+      </ThemeProvider>
+    );
+
     const secondTask = getByText('Segundo todo');
 
     fireEvent.press(secondTask);

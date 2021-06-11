@@ -46,7 +46,7 @@ export const TaskMarker = styled.View<TaskMarkerProps>`
   ${props =>
     props.done &&
     css`
-      background-color: ${props => props.theme.text};
+      background-color: ${props => props.theme.primary};
     `}
 `
 
@@ -56,7 +56,7 @@ export const TaskText = styled.Text<TaskTextProps>`
   ${props =>
     props.done &&
     css`
-      color: ${props => props.theme.text}96;
+      color: ${props => props.theme.gray};
       text-decoration-line: line-through;
     `}
 `

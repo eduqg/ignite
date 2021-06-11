@@ -2,15 +2,21 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 
 import { Home } from '../../pages/Home';
+import { ThemeProvider } from 'styled-components/native';
+import { light } from '../../styles/theme';
 
 describe('Home', () => {
   it('should be able to render new added tasks', () => {
-    const { getByPlaceholderText, getByText } = render(<Home />);
+    const { getByPlaceholderText, getByText } = render(
+      <ThemeProvider theme={light}>
+        <Home />
+      </ThemeProvider>
+    );
     const inputElement = getByPlaceholderText('Adicionar novo todo...');
 
     fireEvent.changeText(inputElement, 'Primeira tarefa');
     fireEvent(inputElement, 'submitEditing');
-    
+
     fireEvent.changeText(inputElement, 'Segunda tarefa');
     fireEvent(inputElement, 'submitEditing');
 
@@ -19,7 +25,11 @@ describe('Home', () => {
   });
 
   it('should not be able to add an empty task', () => {
-    const { getByPlaceholderText, queryByText } = render(<Home />);
+    const { getByPlaceholderText, queryByText } = render(
+      <ThemeProvider theme={light}>
+        <Home />
+      </ThemeProvider>
+    );
     const inputElement = getByPlaceholderText('Adicionar novo todo...');
 
     fireEvent.changeText(inputElement, '');
@@ -29,7 +39,11 @@ describe('Home', () => {
   });
 
   it('should be able to render tasks as done and undone', () => {
-    const { getByPlaceholderText, getByText, getByTestId } = render(<Home />);
+    const { getByPlaceholderText, getByText, getByTestId } = render(
+      <ThemeProvider theme={light}>
+        <Home />
+      </ThemeProvider>
+    );
     const inputElement = getByPlaceholderText('Adicionar novo todo...');
 
     fireEvent.changeText(inputElement, 'Primeira tarefa');
@@ -37,13 +51,10 @@ describe('Home', () => {
 
     const buttonElement = getByTestId('button-0');
     const markerElement = getByTestId('marker-0');
-    
+
     const taskElement = getByText('Primeira tarefa');
 
     expect(buttonElement).toHaveStyle({
-      flex: 1,
-      paddingHorizontal: 10,
-      paddingVertical: 12,
       marginBottom: 4,
       borderRadius: 4,
       flexDirection: 'row',
@@ -76,12 +87,16 @@ describe('Home', () => {
   });
 
   it('should be able to remove tasks by "longPress" event', async () => {
-    const { getByPlaceholderText, getByText, queryByText } = render(<Home />);
+    const { getByPlaceholderText, getByText, queryByText } = render(
+      <ThemeProvider theme={light}>
+        <Home />
+      </ThemeProvider>
+    );
     const inputElement = getByPlaceholderText('Adicionar novo todo...');
 
     fireEvent.changeText(inputElement, 'Primeira tarefa');
     fireEvent(inputElement, 'submitEditing');
-    
+
     fireEvent.changeText(inputElement, 'Segunda tarefa');
     fireEvent(inputElement, 'submitEditing');
 

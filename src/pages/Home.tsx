@@ -11,11 +11,11 @@ interface Task {
 }
 
 interface HomeProps {
-  isEnabled: boolean;
-  setIsEnabled(data: boolean): void
+  isEnabled?: boolean;
+  setIsEnabled?(data: boolean): void
 }
 
-export function Home({ isEnabled, setIsEnabled }: HomeProps) {
+export function Home({ isEnabled = false, setIsEnabled = () => {} }: HomeProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {

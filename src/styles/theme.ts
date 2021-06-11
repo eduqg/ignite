@@ -5,7 +5,7 @@ const dark: DefaultTheme = {
   success: '#565BFF',
   background: '#10101E',
   text: '#E1E1E6',
-  gray: '#E1E1E696',
+  gray: '#A09CB1',
   light: '#212136'
 }
 

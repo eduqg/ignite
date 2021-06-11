@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Header } from '../components/Header';
-import { MyTasksList } from '../components/MyTasksList';
+import { MyTasksList } from '../components/MyTaskList';
 import { TodoInput } from '../components/TodoInput';
 
 interface Task {
@@ -10,7 +10,12 @@ interface Task {
   done: boolean;
 }
 
-export function Home() {
+interface HomeProps {
+  isEnabled: boolean;
+  setIsEnabled(data: boolean): void
+}
+
+export function Home({ isEnabled, setIsEnabled }: HomeProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {
@@ -38,7 +43,7 @@ export function Home() {
 
   return (
     <>
-      <Header />
+      <Header isEnabled={isEnabled} setIsEnabled={setIsEnabled} />
 
       <TodoInput addTask={handleAddTask} />
 

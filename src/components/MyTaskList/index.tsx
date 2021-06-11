@@ -1,10 +1,13 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, View, Text, StyleSheet, FlatListProps } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
+
+import { useTheme } from 'styled-components';
+import { Header, TaskButton, TaskMarker, TaskText } from './styles';
 
 function FlatListHeaderComponent() {
   return (
     <View>
-      <Text style={styles.header}>Minhas tasks</Text>
+      <Header>Minhas tasks</Header>
     </View>
   )
 }
@@ -20,38 +23,41 @@ interface MyTasksListProps {
 }
 
 export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
+  const theme = useTheme();
+
   return (
     <FlatList
       data={tasks}
       keyExtractor={item => String(item.id)}
       renderItem={({ item, index }) => {
         return (
-          <TouchableOpacity
+          <TaskButton
             testID={`button-${index}`}
             activeOpacity={0.7}
             onPress={() => onPress(item.id)}
             onLongPress={() => onLongPress(item.id)}
-            style={item.done ? styles.taskButtonDone : styles.taskButton}
+            done={item.done}
           >
-            <View
+            <TaskMarker
               testID={`marker-${index}`}
-              style={item.done ? styles.taskMarkerDone : styles.taskMarker}
+              done={item.done}
             />
-            <Text
-              style={item.done ? styles.taskTextDone : styles.taskText}
+            <TaskText
+              done={item.done}
             >
               {item.title}
-            </Text>
-          </TouchableOpacity>
+            </TaskText>
+          </TaskButton>
         )
       }}
       ListHeaderComponent={<FlatListHeaderComponent />}
       ListHeaderComponentStyle={{
-        marginBottom: 20
+        paddingBottom: 20,
       }}
       style={{
-        marginHorizontal: 24,
-        marginTop: 32
+        paddingHorizontal: 24,
+        paddingTop: 32,
+        backgroundColor: theme.background
       }}
     />
   )

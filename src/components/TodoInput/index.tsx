@@ -1,7 +1,9 @@
-import React, { useRef, useState } from 'react';
-import { Image, Platform, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import { useTheme } from 'styled-components';
 
-import checkIcon from '../assets/icons/Check.png';
+import checkIcon from '../../assets/icons/Check.png';
+import {Wrapper, InputContainer, Input, AddButton } from './styles';
 
 interface TodoInputProps {
   addTask: (task: string) => void;
@@ -9,6 +11,7 @@ interface TodoInputProps {
 
 export function TodoInput({ addTask }: TodoInputProps) {
   const [task, setTask] = useState('');
+  const theme = useTheme();
 
   function handleAddNewTask() {
     if (task !== '') {
@@ -18,24 +21,26 @@ export function TodoInput({ addTask }: TodoInputProps) {
   }
 
   return (
-    <View style={[styles.inputContainer, Platform.OS === 'ios' ? styles.inputIOSShadow : styles.inputAndroidShadow]}>
-      <TextInput
-        style={styles.input}
-        placeholder="Adicionar novo todo..."
-        returnKeyType="send"
-        onChangeText={setTask}
-        onSubmitEditing={handleAddNewTask}
-        value={task}
-      />
-      <TouchableOpacity
-        testID="add-new-task-button"
-        activeOpacity={0.7}
-        style={styles.addButton}
-        onPress={handleAddNewTask}
-      >
-        <Image source={checkIcon} />
-      </TouchableOpacity>
-    </View>
+    // <View style={[styles.inputContainer, Platform.OS === 'ios' ? styles.inputIOSShadow : styles.inputAndroidShadow]}>
+    <Wrapper>
+      <InputContainer>
+        <Input
+          placeholder="Adicionar novo todo..."
+          returnKeyType="send"
+          onChangeText={setTask}
+          onSubmitEditing={handleAddNewTask}
+          value={task}
+          placeholderTextColor={theme.text}
+        />
+        <AddButton
+          testID="add-new-task-button"
+          activeOpacity={0.7}
+          onPress={handleAddNewTask}
+        >
+          <Image source={checkIcon} />
+        </AddButton>
+      </InputContainer>
+    </Wrapper>
   )
 }
 

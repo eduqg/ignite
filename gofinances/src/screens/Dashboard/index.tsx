@@ -1,22 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 
-// import { Container } from './styles';
+import { Container, Text } from './styles';
 
 const Dashboard: React.FC = () => {
   return (
-    <View style={styles.container}>
+    <Container  >
       <Text>Dashboard</Text>
-    </View>
+    </Container>
   )
 }
 
 export default Dashboard;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})

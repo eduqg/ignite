@@ -14,6 +14,28 @@ yarn
 expo start
 ```
 
+Fontes
+
+```console
+expo install expo-font  @expo-google-fonts/poppins
+```
+
+Tamanhos
+
+```console
+yarn add react-native-responsive-fontsize
+```
+
+
+```console
+
+```
+
+
+```console
+
+```
+
 
 ```console
 

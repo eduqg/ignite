@@ -28,7 +28,7 @@ yarn add react-native-responsive-fontsize
 
 
 ```console
-
+yarn add react-native-iphone-x-helper
 ```
 
 

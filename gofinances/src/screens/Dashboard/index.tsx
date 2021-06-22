@@ -1,10 +1,17 @@
 import React from 'react';
-
-import { Text } from 'react-native';
+import HighlightCard from '../../components/HighlightCard'
 
 import {
   Container,
-  Header,UserWrapper, UserInfo, User, Photo, UserGreeting, UserName
+  Header,
+  UserWrapper,
+  UserInfo,
+  User,
+  Photo,
+  UserGreeting,
+  UserName,
+  Icon,
+  HighlightCards
 } from './styles';
 
 const Dashboard: React.FC = () => {
@@ -22,9 +29,15 @@ const Dashboard: React.FC = () => {
             </User>
           </UserInfo>
 
-
+          <Icon name="power" />
         </UserWrapper>
       </Header>
+
+      <HighlightCards>
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+      </HighlightCards>
     </Container>
   )
 }

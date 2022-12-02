@@ -1,8 +1,8 @@
 ## Conceitos React Native
 
-<img width="200px" src="./desafios/1-conceitos-do-react-native-e-theme/1-conceitos-do-react-native.png" alt="Tela Desafio 1"/>
-<img width="200px" src="./desafios/1-conceitos-do-react-native-e-theme/1.2-desafio-theme-switch.png" alt="Tela Desafio 2"/>
-<img width="200px" src="./desafios/1-conceitos-do-react-native-e-theme/1.2-desafio-theme-switch-2.png" alt="Tela Desafio 2"/>
+<img width="200px" src="./react-native-2021/desafios/1-conceitos-do-react-native-e-theme/1-conceitos-do-react-native.png" alt="Tela Desafio 1"/>
+<img width="200px" src="./react-native-2021/desafios/1-conceitos-do-react-native-e-theme/1.2-desafio-theme-switch.png" alt="Tela Desafio 2"/>
+<img width="200px" src="./react-native-2021/desafios/1-conceitos-do-react-native-e-theme/1.2-desafio-theme-switch-2.png" alt="Tela Desafio 2"/>
 
 ## Resoluções
 

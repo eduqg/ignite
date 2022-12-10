@@ -30,7 +30,7 @@ export function Task({ name, checked, onRemove, onSwitch }: TaskProps) {
         )}
       </TouchableOpacity>
 
-      <Text style={styles.name}>
+      <Text style={checked ? styles.nameChecked : styles.name}>
         {name}
       </Text>
 

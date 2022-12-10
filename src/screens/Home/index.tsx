@@ -21,7 +21,7 @@ export function Home() {
     const foundTask = tasks.find(item => item.name === taskName)
 
     if (foundTask) {
-      return Alert.alert("task existe", "Já existe um taske na lista com esse nome.");
+      return Alert.alert("Tarefa existe", "Já existe um tarefa na lista com esse nome.");
     }
 
     setTasks(prevState => [...prevState, {
@@ -32,7 +32,7 @@ export function Home() {
   }
 
   function handleTaskRemove(name: string) {
-    Alert.alert("Remover", `Remover o taske ${name}?`, [
+    Alert.alert("Remover", `Remover a tarefa ${name}?`, [
       {
         text: 'Sim',
         onPress: () => setTasks(prevState => prevState.filter(task => task.name !== name))

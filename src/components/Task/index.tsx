@@ -7,16 +7,22 @@ import imageNotCheck from '../../../assets/notcheck.png'
 
 import { styles } from "./styles";
 
-interface ParticipantProps {
+export interface ITask {
   name: string;
   checked: boolean;
-  onRemove: () => void
 }
 
-export function Participant({ name, checked, onRemove }: ParticipantProps) {
+interface TaskProps {
+  name: string;
+  checked: boolean;
+  onRemove: () => void;
+  onSwitch: (taskName: string) => void;
+}
+
+export function Task({ name, checked, onRemove, onSwitch }: TaskProps) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={onRemove}>
+      <TouchableOpacity style={styles.button} onPress={() => onSwitch(name)}>
         {checked ? (
           <Image style={styles.check} source={imageCheck} />
         ) : (

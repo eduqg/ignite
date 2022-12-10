@@ -22,19 +22,9 @@ export const styles = StyleSheet.create({
     width: 16,
     height: 16,
   },
-  // eventName: {
-  //   color: '#FFF',
-  //   fontSize: 24,
-  //   fontWeight: 'bold',
-  // },
-  // eventDate: {
-  //   color: '#6B6B6B',
-  //   fontSize: 16
-  // },
   form: {
     width: "100%",
     flexDirection: "row",
-    // marginTop: 36,
     marginBottom: 42,
   },
   input: {

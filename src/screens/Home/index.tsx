@@ -1,37 +1,41 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Alert, FlatList, Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-import { Participant } from "../../components/Participant";
+import { ITask, Task } from "../../components/Task";
 
 import todoImage from '../../../assets/todo.png';
 import blackImage from '../../../assets/black.png';
 import plusImage from '../../../assets/plus.png';
 import boardImage from '../../../assets/board.png';
-import trashImage from '../../../assets/trash.png';
 
 import { styles } from "./styles";
 import { CreatedConcluded } from "../../components/CreatedConcluded";
 
 export function Home() {
-  const [participants, setParticipants] = useState<string[]>([]);
-  const [participantName, setParticipantName] = useState('');
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [taskName, setTaskName] = useState('');
 
-  function handleParticipantAdd() {
-    if (participantName === '') return;
+  function handleTaskAdd() {
+    if (taskName === '') return;
 
-    if (participants.includes(participantName)) {
-      return Alert.alert("Participante existe", "Já existe um participante na lista com esse nome.");
+    const foundTask = tasks.find(item => item.name === taskName)
+
+    if (foundTask) {
+      return Alert.alert("task existe", "Já existe um taske na lista com esse nome.");
     }
 
-    setParticipants(prevState => [...prevState, participantName]);
-    setParticipantName('');
+    setTasks(prevState => [...prevState, {
+      name: taskName,
+      checked: false
+    }]);
+    setTaskName('');
   }
 
-  function handleParticipantRemove(name: string) {
-    Alert.alert("Remover", `Remover o participante ${name}?`, [
+  function handleTaskRemove(name: string) {
+    Alert.alert("Remover", `Remover o taske ${name}?`, [
       {
         text: 'Sim',
-        onPress: () => setParticipants(prevState => prevState.filter(participant => participant !== name))
+        onPress: () => setTasks(prevState => prevState.filter(task => task.name !== name))
       },
       {
         text: 'Não',
@@ -40,6 +44,27 @@ export function Home() {
     ])
   }
 
+  function switchCheckTask(name: string) {
+    setTasks(prevState => {
+      const newTasks = prevState.map((task: ITask) => {
+        if (task.name === name) {
+          return {
+            name: task.name,
+            checked: !task.checked
+          }
+        }
+        return task;
+      })
+
+      return newTasks;
+    })
+  }
+
+  const concludedTasks = useMemo(() => {
+    const newConcludedTasks = tasks.filter(item => item.checked)
+    return newConcludedTasks.length
+  }, [tasks])
+
   return (
     <View style={styles.container}>
       <ImageBackground source={blackImage} resizeMode="cover" style={styles.blackImage}>
@@ -47,41 +72,34 @@ export function Home() {
       </ImageBackground>
 
       <View style={styles.content}>
-        {/* <Text style={styles.eventName}>
-          Nome do evento
-        </Text>
-
-        <Text style={styles.eventDate}>
-          Sexta, 4 de Novembro de 2022.
-        </Text> */}
-
         <View style={styles.form}>
           <TextInput
             style={styles.input}
             placeholder="Adicione uma tarefa"
             placeholderTextColor="#6B6B6B"
-            onChangeText={setParticipantName}
-            value={participantName}
+            onChangeText={setTaskName}
+            value={taskName}
           />
 
-          <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
+          <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
             <Text style={styles.buttonText}>
               <Image style={styles.icon} source={plusImage} />
             </Text>
           </TouchableOpacity>
         </View>
 
-        <CreatedConcluded created={2} concluded={3} />
+        <CreatedConcluded created={tasks.length} concluded={concludedTasks} />
 
         <FlatList
-          data={participants}
-          keyExtractor={(item) => item}
+          data={tasks}
+          keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
-            <Participant
-              key={item}
-              name={item}
-              checked={true}
-              onRemove={() => handleParticipantRemove(item)}
+            <Task
+              key={item.name}
+              name={item.name}
+              checked={item.checked}
+              onRemove={() => handleTaskRemove(item.name)}
+              onSwitch={switchCheckTask}
             />
           )}
           showsVerticalScrollIndicator={false}

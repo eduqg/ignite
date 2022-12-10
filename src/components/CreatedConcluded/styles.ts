@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   number: {
     backgroundColor: '#333333',
-    paddingHorizontal: 4,
+    paddingHorizontal: 6,
     borderRadius: 999,
     color: '#D9D9D9',
     fontWeight: 'bold'

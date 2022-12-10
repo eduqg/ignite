@@ -80,6 +80,7 @@ export function Home() {
             <Participant
               key={item}
               name={item}
+              checked={true}
               onRemove={() => handleParticipantRemove(item)}
             />
           )}

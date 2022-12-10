@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   name: {
     flex: 1,
     fontSize: 16,
-    color: '#FFF',
+    color: '#D9D9D9',
     marginLeft: 16
   },
   buttonText: {

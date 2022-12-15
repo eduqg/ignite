@@ -1,11 +1,20 @@
 # Ignite 2022 react-native
 
-## Project 1 - Todo App ([Folder](./react-native-2022/desafios/1-todo/))
+## Class 1 - Imhere ([Folder](./react-native-2022/aulas/1-imhere/))
+
+<img width="200px" src="./react-native-2022/aulas/2-igniteteams/igniteteams-1.png" alt="Tela 1 Aula igniteteams 2022"/>
+<img width="200px"  src="./react-native-2022/aulas/2-igniteteams/igniteteams-2.png"  alt="Tela 2 Aula igniteteams 2022"/>
+
+## Challenge 1 - Todo App ([Folder](./react-native-2022/desafios/1-todo/))
 
 <img width="200px" src="./react-native-2022/desafios/1-todo/todo-1.png" alt="Tela 1 Desafio todo 2022"/>
 <img width="200px" src="./react-native-2022/desafios/1-todo/todo-2.png" alt="Tela 2 Desafio todo 2022"/>
 
+## Class 2 - Ignite Teams ([Folder](./react-native-2022/aulas/2-igniteteams/))
 
+<img width="200px" src="./react-native-2022/aulas/2-igniteteams/igniteteams-1.png" alt="Tela 1 Aula igniteteams 2022"/>
+<img width="200px"  src="./react-native-2022/aulas/2-igniteteams/igniteteams-2.png"  alt="Tela 2 Aula igniteteams 2022"/>
+<img width="200px"  src="./react-native-2022/aulas/2-igniteteams/igniteteams-3.png"  alt="Tela 3 Aula igniteteams 2022"/>
 
 # Ignite 2021 react-native
 

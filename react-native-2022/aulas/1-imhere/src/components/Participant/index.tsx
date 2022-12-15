@@ -3,12 +3,12 @@ import { Alert, FlatList, Text, TextInput, TouchableOpacity, View } from "react-
 
 import { styles } from "./styles";
 
-interface TaskProps {
+interface ParticipantProps {
   name: string;
   onRemove: () => void
 }
 
-export function Task({ name, onRemove }: TaskProps) {
+export function Participant({ name, onRemove }: ParticipantProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>

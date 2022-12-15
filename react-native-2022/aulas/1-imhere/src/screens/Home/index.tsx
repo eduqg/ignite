@@ -1,30 +1,30 @@
 import { useState } from "react";
 import { Alert, FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-import { Task } from "../../components/Task";
+import { Participant } from "../../components/Participant";
 
 import { styles } from "./styles";
 
 export function Home() {
-  const [tasks, setTasks] = useState<string[]>([]);
-  const [taskName, setTaskName] = useState('');
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState('');
 
-  function handleTaskAdd() {
-    if (taskName === '') return;
+  function handleParticipantAdd() {
+    if (participantName === '') return;
 
-    if (tasks.includes(taskName)) {
-      return Alert.alert("task existe", "Já existe um taske na lista com esse nome.");
+    if (participants.includes(participantName)) {
+      return Alert.alert("Participante existe", "Já existe um participante na lista com esse nome.");
     }
 
-    setTasks(prevState => [...prevState, taskName]);
-    setTaskName('');
+    setParticipants(prevState => [...prevState, participantName]);
+    setParticipantName('');
   }
 
-  function handleTaskRemove(name: string) {
-    Alert.alert("Remover", `Remover o taske ${name}?`, [
+  function handleParticipantRemove(name: string) {
+    Alert.alert("Remover", `Remover o participante ${name}?`, [
       {
         text: 'Sim',
-        onPress: () => setTasks(prevState => prevState.filter(task => task !== name))
+        onPress: () => setParticipants(prevState => prevState.filter(participant => participant !== name))
       },
       {
         text: 'Não',
@@ -46,13 +46,13 @@ export function Home() {
       <View style={styles.form}>
         <TextInput
           style={styles.input}
-          placeholder="Nome do taske"
+          placeholder="Nome do participante"
           placeholderTextColor="#6B6B6B"
-          onChangeText={setTaskName}
-          value={taskName}
+          onChangeText={setParticipantName}
+          value={participantName}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
+        <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>
             +
           </Text>
@@ -60,19 +60,19 @@ export function Home() {
       </View>
 
       <FlatList
-        data={tasks}
+        data={participants}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
-          <Task
+          <Participant
             key={item}
             name={item}
-            onRemove={() => handleTaskRemove(item)}
+            onRemove={() => handleParticipantRemove(item)}
           />
         )}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => (
           <Text style={styles.listEmptyText}>
-            Ninguém chegou no evento ainda? Adicione taskes a sua lista de presença.
+            Ninguém chegou no evento ainda? Adicione participantes a sua lista de presença.
           </Text>
         )}
       />

@@ -11,7 +11,7 @@ import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
 import { groupRemoveByName } from '@storage/group/groupRemoveByName';
 
 import { Header } from "@components/Header";
-import { Highlight } from "@components/Highlight";
+import { Highlight } from "@components/Percentage";
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Input } from "@components/Input";
 import { Filter } from "@components/Filter";

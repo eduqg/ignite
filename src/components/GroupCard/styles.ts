@@ -1,19 +1,36 @@
-import { UsersThree } from "phosphor-react-native";
+import { Circle } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container = styled(TouchableOpacity)`
-  width: 100%;
-  height: 90px;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_500};
-  border-radius: 6px;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding: 24px;
-  margin-bottom: 12px;
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_500};
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 50px;
+  margin-bottom: 8px;
+`;
+
+export const Hour = styled.Text`
+  padding-right: 10px;
+  border-right-color: ${({ theme }) => theme.COLORS.GRAY_400};
+  border-right-width: 1px;
+
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.SM}px;
+    color: ${theme.COLORS.GRAY_100};
+    font-family: ${theme.FONT_FAMILY.BOLD};
+  `};
 `;
 
 export const Title = styled.Text`
+  text-align: left;
+  width: 100%;
+  max-width: 240px;
+
   ${({ theme }) => css`
     font-size: ${theme.FONT_SIZE.MD}px;
     color: ${theme.COLORS.GRAY_200};
@@ -21,10 +38,8 @@ export const Title = styled.Text`
   `};
 `;
 
-export const Icon = styled(UsersThree).attrs(({ theme }) => ({
-  size: 32,
-  color: theme.COLORS.GREEN_700,
+export const Icon = styled(Circle).attrs(({ theme }) => ({
+  size: 14,
+  color: theme.COLORS.RED_MID,
   weight: "fill",
-}))`
-  margin-right: 20px;
-`;
+}))``;

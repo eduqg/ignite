@@ -23,5 +23,11 @@
         "./src/utils/*"
       ]
     }
-  }
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "react-native-2021",
+    "react-native-2022"
+  ]
 }

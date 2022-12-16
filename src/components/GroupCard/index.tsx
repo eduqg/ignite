@@ -1,18 +1,25 @@
 import { TouchableOpacityProps } from "react-native";
 
-import { Container, Icon, Title } from "./styles";
+import { Container, Icon, Hour, Title } from "./styles";
 
 type GroupCardProps = TouchableOpacityProps & {
+  date: string;
   title: string;
 }
 
-export function GroupCard({ title, ...rest }: GroupCardProps) {
+export function GroupCard({ date, title, ...rest }: GroupCardProps) {
   return (
     <Container {...rest}>
-      <Icon />
+
+      <Hour>
+        {date}
+      </Hour>
+
       <Title>
         {title}
       </Title>
+
+      <Icon />
     </Container>
   )
 }

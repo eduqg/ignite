@@ -7,7 +7,7 @@ import { groupsGetAll } from '@storage/group/groupsGetAll';
 
 import { GroupCard } from '@components/GroupCard';
 import { Header } from '@components/Header';
-import { Highlight } from '@components/Highlight';
+import { Highlight } from '@components/Percentage';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 

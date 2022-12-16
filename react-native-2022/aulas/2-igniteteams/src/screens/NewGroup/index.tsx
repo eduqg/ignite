@@ -9,7 +9,7 @@ import { Container, Content, Icon } from "./styles";
 
 import { Header } from "@components/Header";
 import { Button } from "@components/Button";
-import { Highlight } from "@components/Highlight";
+import { Highlight } from "@components/Percentage";
 import { Input } from "@components/Input";
 
 export function NewGroup() {

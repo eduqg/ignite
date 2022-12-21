@@ -14,14 +14,14 @@ export const Content = styled.View`
 `;
 
 export const SectionText = styled.Text`
- text-align: center;
- margin-bottom: 24px;
+  text-align: center;
+  margin-bottom: 24px;
 
-${({ theme }) => css`
-  font-size: ${theme.FONT_SIZE.SM}px;
-  font-family: ${theme.FONT_FAMILY.BOLD};
-  color: ${theme.COLORS.GRAY_100};
-`};
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.SM}px;
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    color: ${theme.COLORS.GRAY_100};
+  `};
 `;
 
 export const ListStats = styled.View`

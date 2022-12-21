@@ -1,20 +1,23 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-import { BackButton, BackIcon, Container, Logo, User } from "./styles";
+import { BackButton, BackIcon, Container, Logo, User, HeaderText } from "./styles";
 
 import logoImg from '@assets/logo.png';
 import userImg from '@assets/user.png';
+import { Text } from "react-native";
 
 interface HeaderProps {
   showBackButton?: boolean;
+  title?: string;
 }
 
-export function Header({ showBackButton = false }: HeaderProps) {
+export function Header({ showBackButton = false, title = '' }: HeaderProps) {
 
   const navigation = useNavigation()
+  const route = useRoute();
 
   function handleGoBack() {
-    navigation.navigate('groups')
+    navigation.navigate('home')
   }
 
   return (
@@ -30,6 +33,15 @@ export function Header({ showBackButton = false }: HeaderProps) {
             <User source={userImg} />
           </>
         )}
+
+      {
+        route?.name !== 'home' && (
+          <>
+            <HeaderText>{title}</HeaderText>
+            <Text></Text>
+          </>
+        )
+      }
     </Container>
   )
 }

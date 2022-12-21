@@ -11,7 +11,7 @@ import { Percentage } from '@components/Percentage';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
-import { Container, SectionText, GroupText } from './styles';
+import { Container, SectionText, GroupText, Content } from './styles';
 import { Loading } from '@components/Loading';
 import { Meal } from 'src/@types/Meal';
 
@@ -29,7 +29,7 @@ export function Home() {
   }
 
   function handleNewMeal() {
-    navigation.navigate('new');
+    navigation.navigate('newmeal');
   }
 
   async function fetchGroups() {
@@ -46,11 +46,11 @@ export function Home() {
   }
 
   function handleOpenGroup(group: string) {
-    navigation.navigate('players', { group })
+    // navigation.navigate('players', { group })
   }
 
   function handleOpenMeal(meal: Meal) {
-    // navigation.navigate('meals', { meal })
+    navigation.navigate('meals', { meal })
   }
 
   useFocusEffect(useCallback(() => {
@@ -64,41 +64,45 @@ export function Home() {
   return (
     <Container>
       <Header />
-      <Percentage
-        value={90}
-        subtitle="das refeições dentro da dieta"
-        onPress={handleOpenStats}
-      />
+      
+      <Content>
+        <Percentage
+          value={90}
+          subtitle="das refeições dentro da dieta"
+          onPress={handleOpenStats}
+        />
 
-      <SectionText>Refeições</SectionText>
+        <SectionText>Refeições</SectionText>
 
-      <Button
-        title='Nova refeição'
-        onPress={handleNewMeal}
-        style={{ backgroundColor: '#333638'}}
-      />
+        <Button
+          title='Nova refeição'
+          onPress={handleNewMeal}
+          style={{ backgroundColor: '#333638' }}
+        />
 
-      <GroupText>12.08.22</GroupText>
+        <GroupText>12.08.22</GroupText>
 
-      {
-        isLoading ? <Loading /> :
-          <FlatList
-            data={meals}
-            keyExtractor={item => item.name + item.date}
-            style={{ paddingTop: 16, paddingBottom: 16 }}
-            renderItem={({ item }) => (
-              <GroupCard
-                title={item.name}
-                date={item.date}
-                onPress={() => handleOpenMeal(item)}
-              />
-            )}
-            contentContainerStyle={meals.length === 0 && { flex: 1 }}
-            ListEmptyComponent={() => (
-              <ListEmpty message="Que tal cadastrar a primeira turma?" />
-            )}
-          />
-      }
+        {
+          isLoading ? <Loading /> :
+            <FlatList
+              data={meals}
+              keyExtractor={item => item.name + item.date}
+              style={{ paddingTop: 16, paddingBottom: 16 }}
+              renderItem={({ item }) => (
+                <GroupCard
+                  title={item.name}
+                  date={item.date}
+                  onPress={() => handleOpenMeal(item)}
+                />
+              )}
+              contentContainerStyle={meals.length === 0 && { flex: 1 }}
+              ListEmptyComponent={() => (
+                <ListEmpty message="Que tal cadastrar a primeira turma?" />
+              )}
+            />
+        }
+
+      </Content>
     </Container>
   );
 }

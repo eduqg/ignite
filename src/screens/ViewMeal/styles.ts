@@ -2,11 +2,6 @@ import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
-interface ButtonYesProps {
-  yes: boolean;
-  selected: boolean;
-}
-
 interface ContainerProps {
   inside: boolean;
 }
@@ -35,56 +30,20 @@ export const TextInput = styled.Text`
   margin-top: 16px;
 `;
 
-export const DatesView = styled.View`
-  flex-direction: row;
-`;
-
-export const InputDateField = styled(TouchableOpacity)`
-  flex: 1;
-  min-height: 56px;
-  max-height: 56px;
-
-  ${({ theme }) => css`
-    color: ${theme.COLORS.GRAY_200};
-    border: 1px solid ${theme.COLORS.GRAY_500};
-    font-family: ${theme.FONT_FAMILY.REGULAR};
-    font-size: ${theme.FONT_SIZE.MD}px;
-  `};
-
-  border-radius: 6px;
-  padding: 16px;
-`;
-
 export const ViewYesNo = styled.View`
   flex-direction: row;
 `;
 
-export const ButtonYes = styled.TouchableOpacity<ButtonYesProps>`
-  flex: 1;
-  border-radius: 6px;
+export const LabelYes = styled.View`
+  border-radius: 24px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  height: 34px;
+  padding: 0 16px;
 
   ${({ theme }) => css`
     background-color: ${theme.COLORS.GRAY_600};
     border: 2px solid transparent;
   `};
-
-  ${(props) =>
-    props.selected &&
-    props.yes &&
-    css`
-      background-color: ${(props) => props.theme.COLORS.GREEN_LIGHT};
-      border: 2px solid ${(props) => props.theme.COLORS.GREEN_DARK};
-    `}
-
-  ${(props) =>
-    props.selected &&
-    !props.yes &&
-    css`
-      background-color: ${(props) => props.theme.COLORS.RED_LIGHT};
-      border: 2px solid ${(props) => props.theme.COLORS.RED_DARK};
-    `}
 `;

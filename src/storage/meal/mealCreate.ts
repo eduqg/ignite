@@ -1,29 +1,47 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { AppError } from "@utils/AppError";
 
 import { mealsGetAll } from "./mealsGetAll";
 
-import { MEAL_COLLECTION } from "@storage/storageConfig";
 import { MealStorageDTO } from "./MealStorageDTO";
+import { MealByDateStorageDTO } from "./MealsByDateStorageDTO";
+
+import { MEAL_COLLECTION } from "@storage/storageConfig";
 
 export async function mealCreate(newMeal: MealStorageDTO) {
   try {
-    const storedMeals = await mealsGetAll();
-    // const storedMealsByDate = await mealsGetAllByDate();
+    const storedMeals: MealByDateStorageDTO[] = await mealsGetAll();
 
-    // const storageMealsByDateUpdated = storedMealsByDate.map(item => {
+    const hasDateWithMeals =
+      storedMeals &&
+      storedMeals.find((item) => {
+        return item.date === String(newMeal.date);
+      });
 
-    //   return item;
-    // })
-    // const mealAlreadyExists = storedMeals.includes(newGroup);
+    let storageMealsByDateUpdated: MealByDateStorageDTO[] = storedMeals || [];
 
-    // if (mealAlreadyExists) {
-    //   throw new AppError("Já existe uma refeição cadastrado com esse nome e data.");
-    // }
+    if (hasDateWithMeals) {
+      storageMealsByDateUpdated = storedMeals.map(
+        (item: MealByDateStorageDTO) => {
+          if (item.date === String(newMeal.date)) {
+            return {
+              date: item.date,
+              meals: [...item.meals, newMeal],
+            };
+          }
+          return item;
+        }
+      );
+    } else {
+      storageMealsByDateUpdated = [
+        ...storageMealsByDateUpdated,
+        {
+          date: String(newMeal.date),
+          meals: [newMeal],
+        },
+      ];
+    }
 
-    console.log([...storedMeals, newMeal]);
-
-    const storage = JSON.stringify([...storedMeals, newMeal]);
+    const storage = JSON.stringify(storageMealsByDateUpdated);
     await AsyncStorage.setItem(MEAL_COLLECTION, storage);
   } catch (error) {
     throw error;

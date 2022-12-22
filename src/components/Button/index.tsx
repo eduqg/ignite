@@ -10,7 +10,7 @@ type ButtonProps = TouchableOpacityProps & {
 export function Button({ title, type = 'PRIMARY', ...rest }: ButtonProps) {
   return (
     <Container type={type} {...rest}>
-      <Title>{title}</Title>
+      <Title type={type}>{title}</Title>
     </Container>
   )
 }

@@ -1,20 +1,17 @@
-import { Header } from '@components/Header'
-import React, { useCallback, useState } from 'react'
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native'
+import React, { useCallback } from 'react'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { Image } from 'react-native'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
+
+import successImg from '../../assets/person.png'
+import failImg from '../../assets/pena.png'
 
 import {
   Container,
   TextKeepGoing
 } from './styles'
-import { Circle } from 'phosphor-react-native'
-import { InputDate } from '@components/InputDate'
-import { useNavigation, useRoute } from '@react-navigation/native'
-
-import successImg from '../../assets/person.png'
-import failImg from '../../assets/pena.png'
 
 type RouteParams = {
   keep: boolean;
@@ -29,8 +26,6 @@ export function KeepGoing() {
   const handleGoHome = useCallback(() => {
     navigation.navigate('home')
   }, [])
-
-
 
   return (
     <Container>

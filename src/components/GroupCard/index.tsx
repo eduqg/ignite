@@ -19,7 +19,7 @@ export function GroupCard({ meal, ...rest }: GroupCardProps) {
         {meal.name}
       </Title>
 
-      <Icon />
+      <Icon color={meal.insideDiet ? '#CBE4B4' : '#F3BABD'} />
     </Container>
   )
 }

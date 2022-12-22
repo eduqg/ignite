@@ -3,7 +3,7 @@ import { TouchableOpacityProps } from "react-native";
 import { Container, Subtitle, Title } from "./styles";
 
 interface PercentageProps extends TouchableOpacityProps {
-  value: number;
+  value: string;
   subtitle: string;
 }
 
@@ -21,7 +21,7 @@ export function Percentage({ value, subtitle, ...rest }: PercentageProps) {
       </BackButton>
 
       <Title>
-        {value.toFixed(2)}
+        {value}
       </Title>
 
       <Subtitle>

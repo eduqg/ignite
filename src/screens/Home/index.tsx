@@ -1,34 +1,32 @@
 import { useState, useCallback } from 'react';
-import { Alert, FlatList, Text } from 'react-native';
+import { Alert, FlatList, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
-
-import { groupsGetAll } from '@storage/group/groupsGetAll';
 
 import { GroupCard } from '@components/GroupCard';
 import { Header } from '@components/Header';
 import { Percentage } from '@components/Percentage';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
-
-import { Container, SectionText, GroupText, Content } from './styles';
 import { Loading } from '@components/Loading';
-import { Meal } from 'src/@types/Meal';
 import { mealsGetAll } from '@storage/meal/mealsGetAll';
 import { MealStorageDTO } from '@storage/meal/MealStorageDTO';
+import { MealByDateStorageDTO } from '@storage/meal/MealsByDateStorageDTO';
+import { MEAL_COLLECTION } from '@storage/storageConfig';
+
+import { Container, SectionText, GroupText, Content } from './styles';
+import { mealsGetStats, MealStats } from '@storage/meal/mealsGetStats';
 
 export function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [meals, setMeals] = useState<MealStorageDTO[]>([]);
+  const [meals, setMeals] = useState<MealByDateStorageDTO[]>([]);
+  const [stats, setStats] = useState<MealStats | undefined>(undefined);
 
   const navigation = useNavigation();
 
-  function handleNewGroup() {
-    navigation.navigate('new');
-  }
-
   function handleNewMeal() {
-    navigation.navigate('newmeal');
+    navigation.navigate('newmeal', { isEdit: false });
   }
 
   async function fetchMeals() {
@@ -38,22 +36,33 @@ export function Home() {
       setMeals(data)
     } catch (error) {
       Alert.alert('Turmas', 'Não foi possível carregar as turmas');
-      console.log(error);
     } finally {
       setIsLoading(false);
     }
   }
 
-  function handleOpenGroup(group: string) {
-    // navigation.navigate('players', { group })
+  async function fetchStats() {
+    try {
+      const data = await mealsGetStats();
+      setStats(data)
+    } catch (error) {
+      Alert.alert('Turmas', 'Não foi possível carregar os status');
+    } finally {
+    }
   }
 
   function handleOpenMeal(meal: MealStorageDTO) {
     navigation.navigate('meals', { meal })
   }
 
+  async function clearMeals() {
+    await AsyncStorage.removeItem(MEAL_COLLECTION)
+  }
+
   useFocusEffect(useCallback(() => {
     fetchMeals()
+    fetchStats()
+    // clearMeals()
   }, []))
 
   function handleOpenStats() {
@@ -63,13 +72,13 @@ export function Home() {
   return (
     <Container>
       <Header />
-      
+
       <Content>
-        <Percentage
-          value={90}
+        {stats && <Percentage
+          value={`${((stats.mealsInsideDiet * 100) / stats.mealsNumber).toFixed(2)}%`}
           subtitle="das refeições dentro da dieta"
           onPress={handleOpenStats}
-        />
+        />}
 
         <SectionText>Refeições</SectionText>
 
@@ -79,25 +88,30 @@ export function Home() {
           style={{ backgroundColor: '#333638' }}
         />
 
-        <GroupText>12.08.22</GroupText>
 
         {
           isLoading ? <Loading /> :
-            <FlatList
-              data={meals}
-              keyExtractor={item => item.name + item.date}
-              style={{ paddingTop: 16, paddingBottom: 16 }}
-              renderItem={({ item }) => (
-                <GroupCard
-                  meal={item}
-                  onPress={() => handleOpenMeal(item)}
+            meals && meals.map((mealDate) => (
+              <View key={mealDate.date}>
+                <GroupText>{mealDate.date}</GroupText>
+
+                <FlatList
+                  data={mealDate.meals}
+                  keyExtractor={item => item.id}
+                  style={{ paddingTop: 16, paddingBottom: 16 }}
+                  renderItem={({ item }) => (
+                    <GroupCard
+                      meal={item}
+                      onPress={() => handleOpenMeal(item)}
+                    />
+                  )}
+                  contentContainerStyle={meals.length === 0 && { flex: 1 }}
+                  ListEmptyComponent={() => (
+                    <ListEmpty message="Que tal cadastrar a primeira turma?" />
+                  )}
                 />
-              )}
-              contentContainerStyle={meals.length === 0 && { flex: 1 }}
-              ListEmptyComponent={() => (
-                <ListEmpty message="Que tal cadastrar a primeira turma?" />
-              )}
-            />
+              </View>
+            ))
         }
 
       </Content>

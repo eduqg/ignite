@@ -15,6 +15,14 @@
 <img width="200px"  src="./react-native-2022/aulas/2-igniteteams/igniteteams-2.png"  alt="Tela 2 Aula igniteteams 2022"/>
 <img width="200px"  src="./react-native-2022/aulas/2-igniteteams/igniteteams-3.png"  alt="Tela 3 Aula igniteteams 2022"/>
 
+## Challenge 2 - Daily Diet ([Folder](./react-native-2022/desafios/2-dailydiet/))
+
+<img width="200px" src="./diet1.png" alt="Tela 1 Desafio 2"/>
+<img width="200px" src="./diet2.png" alt="Tela 2 Desafio 2"/>
+<img width="200px" src="./diet3.png" alt="Tela 3 Desafio 2"/>
+<img width="200px" src="./diet4.png" alt="Tela 4 Desafio 2"/>
+<img width="200px" src="./diet5.png" alt="Tela 5 Desafio 2"/>
+
 # Ignite 2021 react-native
 
 ## Conceitos React Native 2021

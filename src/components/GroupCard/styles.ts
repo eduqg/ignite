@@ -40,6 +40,5 @@ export const Title = styled.Text`
 
 export const Icon = styled(Circle).attrs(({ theme }) => ({
   size: 14,
-  color: theme.COLORS.RED_MID,
   weight: "fill",
 }))``;

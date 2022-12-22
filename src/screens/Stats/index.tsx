@@ -1,61 +1,35 @@
 import { useState, useCallback } from 'react';
-import { Alert, FlatList, Text, View } from 'react-native';
-
+import { Alert } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
-import { groupsGetAll } from '@storage/group/groupsGetAll';
-
-import { GroupCard } from '@components/GroupCard';
-import { Header } from '@components/Header';
-import { Percentage } from '@components/Percentage';
-import { ListEmpty } from '@components/ListEmpty';
-import { Button } from '@components/Button';
+import { Subtitle, Title } from '@components/Percentage/styles';
+import { BackButton, BackIcon } from '@components/Header/styles';
+import { Container as PercentageArrow } from '@components/Percentage/styles'
+import { mealsGetStats, MealStats } from '@storage/meal/mealsGetStats';
 
 import {
   Container,
   SectionText,
   Content,
-
   ListStats,
   ItemStatus,
   ItemStatusTitle,
   ItemStatusSubtitle
 
 } from './styles';
-import { Loading } from '@components/Loading';
-import { Meal } from 'src/@types/Meal';
-import { Subtitle, Title } from '@components/Percentage/styles';
-import { BackButton, BackIcon } from '@components/Header/styles';
-import { Container as PercentageArrow } from '@components/Percentage/styles'
-
 
 export function Stats() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [meals, setMeals] = useState<Meal[]>([{
-    date: '20:00',
-    name: 'X-tudo'
-  }, { date: '16:00', name: 'Lasanha de frango com queijo' }]);
+  const [stats, setStats] = useState<MealStats | undefined>(undefined);
 
   const navigation = useNavigation();
 
-  function handleNewGroup() {
-    navigation.navigate('new');
-  }
-
-  function handleNewMeal() {
-    navigation.navigate('new');
-  }
-
   async function fetchGroups() {
     try {
-      setIsLoading(true);
-      // const data = await groupsGetAll();
-      // setGroups(data)
+      const data = await mealsGetStats();
+      setStats(data)
     } catch (error) {
-      Alert.alert('Turmas', 'Não foi possível carregar as turmas');
+      Alert.alert('Turmas', 'Não foi possível carregar as estatísticas');
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -82,7 +56,7 @@ export function Stats() {
         </BackButton>
 
         <Title>
-          {Number(90).toFixed(2)}
+          {stats && `${((stats.mealsInsideDiet * 100) / stats.mealsNumber).toFixed(2)}%`}
         </Title>
 
         <Subtitle>
@@ -94,12 +68,12 @@ export function Stats() {
         <SectionText>Estatísticas gerais</SectionText>
 
         <ItemStatus style={{ backgroundColor: '#EFF0F0' }}>
-          <ItemStatusTitle>22</ItemStatusTitle>
+          <ItemStatusTitle>{stats?.bestSequence}</ItemStatusTitle>
           <ItemStatusSubtitle>melhor sequência de pratos dentro da dieta</ItemStatusSubtitle>
         </ItemStatus>
 
         <ItemStatus style={{ backgroundColor: '#EFF0F0' }}>
-          <ItemStatusTitle>109</ItemStatusTitle>
+          <ItemStatusTitle>{stats?.mealsNumber}</ItemStatusTitle>
           <ItemStatusSubtitle>refeições registradas</ItemStatusSubtitle>
         </ItemStatus>
 
@@ -108,7 +82,7 @@ export function Stats() {
             width: 165,
             backgroundColor: '#E5F0DB',
           }}>
-            <ItemStatusTitle>99</ItemStatusTitle>
+            <ItemStatusTitle>{stats?.mealsInsideDiet}</ItemStatusTitle>
             <ItemStatusSubtitle>refeições dentro da {'\n'} dieta</ItemStatusSubtitle>
           </ItemStatus>
 
@@ -116,7 +90,7 @@ export function Stats() {
             width: 165,
             backgroundColor: '#F4E6E7',
           }}>
-            <ItemStatusTitle>99</ItemStatusTitle>
+            <ItemStatusTitle>{stats?.mealsOutsideDiet}</ItemStatusTitle>
             <ItemStatusSubtitle>refeições fora da {'\n'} dieta</ItemStatusSubtitle>
           </ItemStatus>
         </ListStats>

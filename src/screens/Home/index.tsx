@@ -14,13 +14,12 @@ import { Button } from '@components/Button';
 import { Container, SectionText, GroupText, Content } from './styles';
 import { Loading } from '@components/Loading';
 import { Meal } from 'src/@types/Meal';
+import { mealsGetAll } from '@storage/meal/mealsGetAll';
+import { MealStorageDTO } from '@storage/meal/MealStorageDTO';
 
 export function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [meals, setMeals] = useState<Meal[]>([{
-    date: '20:00',
-    name: 'X-tudo'
-  }, { date: '16:00', name: 'Lasanha de frango com queijo' }]);
+  const [meals, setMeals] = useState<MealStorageDTO[]>([]);
 
   const navigation = useNavigation();
 
@@ -32,11 +31,11 @@ export function Home() {
     navigation.navigate('newmeal');
   }
 
-  async function fetchGroups() {
+  async function fetchMeals() {
     try {
       setIsLoading(true);
-      // const data = await groupsGetAll();
-      // setGroups(data)
+      const data = await mealsGetAll();
+      setMeals(data)
     } catch (error) {
       Alert.alert('Turmas', 'Não foi possível carregar as turmas');
       console.log(error);
@@ -49,12 +48,12 @@ export function Home() {
     // navigation.navigate('players', { group })
   }
 
-  function handleOpenMeal(meal: Meal) {
+  function handleOpenMeal(meal: MealStorageDTO) {
     navigation.navigate('meals', { meal })
   }
 
   useFocusEffect(useCallback(() => {
-    fetchGroups()
+    fetchMeals()
   }, []))
 
   function handleOpenStats() {
@@ -90,8 +89,7 @@ export function Home() {
               style={{ paddingTop: 16, paddingBottom: 16 }}
               renderItem={({ item }) => (
                 <GroupCard
-                  title={item.name}
-                  date={item.date}
+                  meal={item}
                   onPress={() => handleOpenMeal(item)}
                 />
               )}

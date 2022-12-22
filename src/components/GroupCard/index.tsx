@@ -1,22 +1,22 @@
+import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
 import { TouchableOpacityProps } from "react-native";
 
 import { Container, Icon, Hour, Title } from "./styles";
 
 type GroupCardProps = TouchableOpacityProps & {
-  date: string;
-  title: string;
+  meal: MealStorageDTO;
 }
 
-export function GroupCard({ date, title, ...rest }: GroupCardProps) {
+export function GroupCard({ meal, ...rest }: GroupCardProps) {
   return (
     <Container {...rest}>
 
       <Hour>
-        {date}
+        {new Date(meal.time).getHours()}:{new Date(meal.time).getMinutes()}
       </Hour>
 
       <Title>
-        {title}
+        {meal.name}
       </Title>
 
       <Icon />

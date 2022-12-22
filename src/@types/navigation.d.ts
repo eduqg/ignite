@@ -1,3 +1,4 @@
+import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
 import { Meal } from "./Meal";
 
 export declare global {
@@ -9,7 +10,7 @@ export declare global {
         keep: boolean;
       };
       meals: {
-        meal: Meal;
+        meal: MealStorageDTO;
       };
       stats: undefined;
       home: undefined;

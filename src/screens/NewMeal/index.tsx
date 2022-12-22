@@ -17,6 +17,9 @@ import {
 import { Circle } from 'phosphor-react-native'
 import { InputDate } from '@components/InputDate'
 import { useNavigation } from '@react-navigation/native'
+import { mealCreate } from '@storage/meal/mealCreate'
+import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
+import { DateTimePickerEvent } from '@react-native-community/datetimepicker'
 
 export function NewMeal() {
   const navigation = useNavigation();
@@ -32,6 +35,13 @@ export function NewMeal() {
 
   async function handleNew() {
     try {
+      const mealToCreate: MealStorageDTO = {
+        name,
+        description,
+        date,
+        time,
+        insideDiet,
+      }
       console.log(
         name,
         description,
@@ -40,7 +50,7 @@ export function NewMeal() {
         insideDiet
       )
 
-      // await groupCreate(group);
+      await mealCreate(mealToCreate);
       navigation.navigate('keepgoing', { keep: insideDiet });
     } catch (error) {
       // if (error instanceof AppError) {
@@ -60,13 +70,13 @@ export function NewMeal() {
     setTimePicker(true);
   };
 
-  function onDateSelected(event, value) {
-    setDate(value);
+  function onDateSelected(event: DateTimePickerEvent, value: Date | undefined) {
+    if (value) setDate(value);
     setDatePicker(false);
   };
 
-  function onTimeSelected(event, value) {
-    setTime(value);
+  function onTimeSelected(event: DateTimePickerEvent, value: Date | undefined) {
+    if (value) setTime(value);
     setTimePicker(false);
   };
 

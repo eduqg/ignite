@@ -8,6 +8,7 @@ export const Container = styled(SafeAreaView)`
 `;
 
 export const Content = styled.View`
+  flex: 1;
   padding: 24px;
 `;
 

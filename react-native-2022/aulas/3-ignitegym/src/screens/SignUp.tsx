@@ -1,4 +1,4 @@
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
 // import { useForm, Controller } from 'react-hook-form';
 // import * as yup from 'yup';
@@ -9,6 +9,7 @@ import BackgroundImg from '@assets/background.png';
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
+import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
 type FormDataProps = {
   name: string;
@@ -30,10 +31,10 @@ export function SignUp() {
   //   resolver: yupResolver(signUpSchema),
   // });
 
-  // const navigation = useNavigation();
+  const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
   function handleGoBack() {
-    // navigation.goBack();
+    navigation.goBack();
   }
 
   function handleSignUp({ name, email, password, password_confirm }: FormDataProps) {

@@ -8,15 +8,14 @@ import { ExerciseCard } from '@components/ExerciseCard';
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 
 export function Home() {
-
   const [groups, setGroups] = useState(['Costas', 'Bíceps', 'Tríceps', 'ombro']);
   const [exercises, setExercises] = useState(['Puxada frontal', 'Remada curvada', 'Remada unilateral', 'Levantamento terras']);
   const [groupSelected, setGroupSelected] = useState('Costas');
 
-  // const navigation = useNavigation<AppNavigatorRoutesProps>();
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleOpenExerciseDetails() {
-    // navigation.navigate('exercise');
+    navigation.navigate('exercise');
   }
 
   return (
@@ -40,6 +39,7 @@ export function Home() {
         }}
         my={10}
         maxH={10}
+        minH={10}
       />
 
       <VStack px={8}>

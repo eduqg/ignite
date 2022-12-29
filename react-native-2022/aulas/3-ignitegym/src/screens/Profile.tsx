@@ -29,14 +29,16 @@ export function Profile() {
         allowsEditing: true,
       });
 
-      if (photoSelected.cancelled) {
+      if (photoSelected.canceled) {
         return;
       }
 
-      if (photoSelected.uri) {
-        const photoInfo = await FileSystem.getInfoAsync(photoSelected.uri);
+      const photoUri = photoSelected.assets[0].uri;
 
-        if (photoInfo.size && (photoInfo.size / 1024 / 1024) > 2) {
+      if (photoUri) {
+        const photoInfo = await FileSystem.getInfoAsync(photoUri);
+
+        if (photoInfo.size && (photoInfo.size / 1024 / 1024) > 5) {
 
           return toast.show({
             title: 'Essa imagem é muito grande. Escolha uma de até 5MB.',
@@ -45,7 +47,7 @@ export function Profile() {
           })
         }
 
-        setUserPhoto(photoSelected.uri);
+        setUserPhoto(photoUri);
       }
 
     } catch (error) {

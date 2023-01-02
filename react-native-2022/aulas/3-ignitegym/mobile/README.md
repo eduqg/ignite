@@ -28,6 +28,8 @@ npm install react-native-svg-transformer --save-dev
   npm install @react-navigation/bottom-tabs
   npx expo install react-native-screens react-native-safe-area-context
   npx expo install expo-file-system
+  npm install react-hook-form
+  npm install @hookform/resolvers yup
 ```
 
 ```console
